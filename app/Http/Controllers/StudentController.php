@@ -135,7 +135,7 @@ class StudentController extends Controller
     public function destroy($id)
     {
         $student = StudentAccount::findOrFail($id);
-        User::where('username',$student['student_code'])->delete();
+        User::where('name',$student['student_code'])->delete();
         $student->delete();
         return redirect()->back()->with('del-success','Xóa thành công');
     }
