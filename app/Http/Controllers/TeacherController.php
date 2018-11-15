@@ -150,9 +150,11 @@ class TeacherController extends Controller
     {
 
         $account = TeacherAccount::findOrFail($id);
-        $userAccount = User::where('name','like','%'.$account['username'].'%')->first();
-        $userAccount -> delete();
         $account ->delete();
+        $userAccount = User::where('name','like','%'.$account['username'].'%')->first();
+        if($userAccount){
+          $userAccount -> delete();
+        }
         return redirect()->back()->with('del-success','Xóa thành công');
     }
 }
