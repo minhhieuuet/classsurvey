@@ -9,8 +9,6 @@
   Tên giảng viên: {{$course['teacher_name']}}
   <br>
   Số lượng SV đánh giá: {{$course->joiningCount($course['id'])}}
-  <br>
-  Sô lượng tham gia giảng dạy:
   <table class="table table-bordered">
     <thead>
       <tr>

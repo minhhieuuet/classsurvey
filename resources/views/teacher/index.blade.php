@@ -13,9 +13,7 @@
       <i class="far fa-file-excel" ></i>
       Nhập từ excel
     </button>
-    <button type="button" class="btn btn-danger">
-      <i class="fa fa-trash">Xóa</i>
-    </button>
+
 
   </div>
 </div>

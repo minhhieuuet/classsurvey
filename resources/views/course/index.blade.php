@@ -68,22 +68,11 @@
       <td>
         <div class="btn-group" >
           {{-- Edit button --}}
-          <a href="" target="_blank">
+          <a href="{{asset('admin/khao-sat/'.$course->survey['id'].'/edit')}}" target="_blank">
             <button type="button" class="btn btn-info"  >
                <i class="fa fa-edit"></i>
             </button>
           </a>
-
-
-            {{-- Show button --}}
-            <a href="" target="_blank">
-              <button type="submit" class="btn btn-success" >
-                 <i class="fa fa-eye"></i>
-              </button>
-            </a>
-
-            {{--  --}}
-
             {{-- Delete button --}}
             <form  method="post" action="{{url('admin/mon-hoc/'.$course['id'])}}" >
               @csrf
