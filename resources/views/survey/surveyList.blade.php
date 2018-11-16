@@ -20,6 +20,7 @@
     <th>Tiêu đề</th>
     <th>Ngày tạo</th>
     <th>Sửa lần cuối</th>
+    <th>Mậc định</th>
     <th>Hành động</th>
   </thead>
   <tbody>
@@ -30,6 +31,13 @@
       <td>{{$survey['name']}}</td>
       <td>{{$survey['created_at']}}</td>
       <td>{{$survey['updated_at']}}</td>
+      <td>
+        @if($survey['default'])
+          <button class="btn btn-success" name="button"> <i class="fa fa-check"></i></button>
+        @else
+          <button class="btn btn-danger" name="button"> <i class="fa fa-times"></i> </button>
+        @endif
+      </td>
       <td>
         <div class="btn-group" >
           {{-- Edit button --}}

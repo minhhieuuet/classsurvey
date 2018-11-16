@@ -83,9 +83,9 @@ class TeacherController extends Controller
         "full_name"=>"required",
         "vnu_mail"=>"required|email"
       ]);
-
       TeacherAccount::create(["username"=>$request['username'],"password"=>bcrypt($request['password']),"full_name"=>$request['full_name'],
       "vnu_mail"=>$request['vnu_mail']]);
+      User::create(["name"=>$request['username'],"password"=>bcrypt($request['password']),"email"=>$request['vnu_mail']]);
       return redirect()->back()->with('create-success','Thêm thành công');
     }
 
