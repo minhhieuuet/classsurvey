@@ -32,11 +32,13 @@
       <td>{{$survey['created_at']}}</td>
       <td>{{$survey['updated_at']}}</td>
       <td>
+        <a href="{{url("admin/khao-sat/default/".$survey['id'])}}">
         @if($survey['default'])
           <button class="btn btn-success" name="button"> <i class="fa fa-check"></i></button>
         @else
           <button class="btn btn-danger" name="button"> <i class="fa fa-times"></i> </button>
         @endif
+        <a>
       </td>
       <td>
         <div class="btn-group" >

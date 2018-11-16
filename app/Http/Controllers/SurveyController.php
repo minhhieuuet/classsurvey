@@ -18,7 +18,18 @@ class SurveyController extends Controller
     }
 
     // Show all course
+    public function changeDefault($id){
+      $survey = Survey::findOrFail($id);
+      Survey::query()->update(['default'=>false]);
 
+      if($survey -> default == true){
+        $survey -> default = false;
+      }else{
+        $survey -> default = true;
+      }
+      $survey -> save();
+      return redirect()->back();
+    }
 
     /**
      * Show the form for creating a new resource.

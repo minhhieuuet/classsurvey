@@ -64,8 +64,9 @@ Route::group(['prefix'=>'admin','middleware'=>'admin'],function(){
       Route::get('thong-ke/{id}','CourseController@courseInfo');
     });
   // Khao sat
-
+  Route::get('khao-sat/default/{id}','SurveyController@changeDefault');
   Route::resource('khao-sat','SurveyController');
+
   // Lop mon hoc
   Route::group(['prefix'=>'mon-hoc'],function(){
     Route::post('import','CourseController@import')->name('importCourse');
