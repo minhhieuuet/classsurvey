@@ -30,7 +30,7 @@ swal({
   Khảo sát của tôi
 </h1>
 <div class="row">
-
+@if($student)
   @foreach($student->courses as $course)
     <table class="table col-md-4 table-bordered" style="margin:30px;">
       <thead class="text-center">
@@ -84,7 +84,7 @@ swal({
     </table>
   @endforeach
 </div>
-
+@endif
 
 
 @endsection
