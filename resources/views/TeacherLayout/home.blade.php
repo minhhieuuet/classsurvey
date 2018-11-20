@@ -27,7 +27,7 @@ swal({
 </script>
 
 <h1 class="title">
-  Khảo sát của tôi
+  Khảo sát của tôi 
 </h1>
 <div class="row">
   @foreach($courses as $course)
@@ -63,9 +63,14 @@ swal({
             <td>
               <a href="{{asset('giang-vien/khao-sat/'.$course['id'])}}">
               <button type="button" class="btn btn-info" name="button">
-                <i class="fas fa-info-circle"></i> Xem chi tiết
+                <i class="fas fa-info-circle"></i> Xem thống kê
               </button>
-            </a>
+              </a>
+              <a href="{{asset('giang-vien/khao-sat/danh-sach/'.$course['id'])}}">
+              <button type="button" class="btn btn-success" name="button">
+                <i class="fas fa-users"></i> Xem danh sách
+              </button>
+              </a>
             </td>
           </tr>
         </tbody>
