@@ -134,17 +134,18 @@ class CourseController extends Controller
         foreach( $results as $result){
           if($result['ma_sv']!=null){
             // Create student
-            $student =  Student::updateOrCreate(['student_code'=>$result['ma_sv']],['student_code'=>$result['ma_sv'],
+            $student =  Student::updateOrCreate(['student_code'=>$this->trim_str($result['ma_sv']]),
+            ['student_code'=>$this->trim_str($result['ma_sv']),
             'name'=>$result['ho_va_ten'],
             'school_year'=>$result['lop_khoa_hoc']]);
              Student_Course::create(['student_id'=>$student['id'],'course_id'=>Course::orderBy('id','DESC')->first()['id']]);
 
              //Create default student accounts
-             StudentAccount::firstOrCreate(['username'=>$result['ma_sv']],[
-             'username'=>$result['ma_sv'],
+             StudentAccount::firstOrCreate(['username'=>$this->trim_str($result['ma_sv'])],[
+             'username'=>$this->trim_str($result['ma_sv']),
              'password'=>bcrypt('12345678'),
              'full_name'=>$result['ho_va_ten']
-             ,'vnu_mail'=>'Chưa có email',
+             ,'vnu_mail'=>$result['ma_sv']."@vnu.edu.vn",
              'school_year'=>$result['lop_khoa_hoc']]);
              User::firstOrCreate(['name'=>$result['ma_sv']],[
                'name'=>$result['ma_sv'],
@@ -245,5 +246,9 @@ class CourseController extends Controller
     {
         Course::findOrFail($id)->delete();
         return redirect()->back()->with('del-success','Done');
+    }
+
+    public function trim_str($str){
+      return preg_replace('/[\s]+/mu', ' ',$str);
     }
 }

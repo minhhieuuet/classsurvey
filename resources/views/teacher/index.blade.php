@@ -269,9 +269,6 @@
           minlength:"Tài khoản quá ngắn",
           maxlength:"Tài khoản quá dài"
         },
-        password:{
-          minlength:"Mật khẩu phải có ít nhất 8 kí tự"
-        },
         re_password:{
 
           equalTo:"Mật khẩu không khớp"

@@ -23,8 +23,7 @@
     <th>Họ và tên</th>
     <th>Niên khóa</th>
     <th>Khảo sát</th>
-    <th>Tài khoản</th>
-    <th>Hành động</th>
+
   </thead>
   <tbody>
   @foreach($students as $index =>  $student )
@@ -44,14 +43,14 @@
       @endforeach
     </ul>
       </td>
-      <td>
+      {{-- <td>
       @if($student->account)
         {{$student->account['username']}}
       @else
         <button class="btn btn-success" type="button" >Tạo tài khoản</button>
       @endif
       </td>
-      <td></td>
+      <td></td> --}}
     </tr>
   @endforeach
   </tbody>

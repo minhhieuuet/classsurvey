@@ -84,9 +84,10 @@ class StudentController extends Controller
                $value = array_values($student);
                // filter only number
                $username = preg_replace('/[^0-9]/', '', $value[1]);
-               StudentAccount::updateOrCreate(["username"=>$username],["username"=>$username,"password"=>bcrypt($value[2]),"full_name"=>$value[3],
+               StudentAccount::updateOrCreate(["username"=>$this->trim_str($username)],
+               ["username"=>$this->trim_str($username),"password"=>bcrypt($value[2]),"full_name"=>$value[3],
                "vnu_mail"=>$value[4],"school_year"=>$value[5]]);
-               User::updateOrCreate(["name"=>$username],['name'=>$username,"password"=>bcrypt($value[2]),"email"=>$value[4],"role"=>3]);
+               User::updateOrCreate(["name"=>$this->trim_str($username)],['name'=>$this->trim_str($username),"password"=>bcrypt($value[2]),"email"=>$value[4],"role"=>3]);
              }
 
              return redirect()->back()->with('success','Done');
@@ -123,7 +124,21 @@ class StudentController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+      $request->validate([
+        "username"=>'required|unique:student_accounts,username,'.$id,
+        "full_name"=>"required",
+        "vnu_mail"=>"email"
+      ]);
+      $student = StudentAccount::findOrFail($id);
+      $student ->  username = $this->trim_str($request['username']);
+      $student -> full_name = $request['full_name'];
+      $student -> vnu_mail = $request['vnu_mail'];
+      $student -> school_year = $request['school_year'];
+      if($request['password']!= null && $request['password']==$request['re_password']){
+        $student -> password = bcrypt($request['password']);
+      }
+      $student -> save();
+      return redirect()->back();
     }
 
     /**
@@ -138,5 +153,9 @@ class StudentController extends Controller
         User::where('name',$student['student_code'])->delete();
         $student->delete();
         return redirect()->back()->with('del-success','Xóa thành công');
+    }
+
+    public function trim_str($str){
+      return preg_replace('/[\s]+/mu', ' ',$str);
     }
 }

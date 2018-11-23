@@ -40,10 +40,14 @@ class TeacherController extends Controller
 
             foreach($arr as $teacher){
               $value = array_values($teacher);
-              TeacherAccount::updateOrCreate(["username"=>trim($value[1])],["username"=>trim($value[1]),"password"=>bcrypt(trim($value[2])),"full_name"=>trim($value[3]),
-              "vnu_mail"=>trim($value[4])]);
-              User::firstOrCreate(["name"=>trim($value[1])],["name"=>trim($value[1]),
-              "email"=>trim($value[4]),
+              TeacherAccount::updateOrCreate(["username"=>trim($value[1])],
+              ["username"=>$this->trim_str($value[1]),
+              "password"=>bcrypt($value[2]),
+              "full_name"=> $this->trim_str($value[3]),
+              "vnu_mail"=>$this->trim_str($value[4])]);
+
+              User::firstOrCreate(["name"=>$this->trim_str($value[1])],["name"=>$this->trim_str($value[1]),
+              "email"=>$this->trim_str($value[4]),
               "password"=>bcrypt(trim($value[2])),
               "role"=>2]);
             }
@@ -156,5 +160,9 @@ class TeacherController extends Controller
           $userAccount -> delete();
         }
         return redirect()->back()->with('del-success','Xóa thành công');
+    }
+
+    public function trim_str($str){
+      return preg_replace('/[\s]+/mu', ' ',$str);
     }
 }

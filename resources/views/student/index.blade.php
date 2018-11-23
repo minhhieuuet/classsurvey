@@ -56,7 +56,8 @@
       <td>{{$account['vnu_mail']}}</td>
       <td>
         <div class="btn-group" account_id={{$account['id']}} account_info="{{$account}}">
-            <button type="button" class="btn btn-info" > <i class="fa fa-edit"></i> </button>
+            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#editModal" onclick="setValueEditForm(this)" > <i class="fa fa-edit"></i> </button>
+
             <button type="button" class="btn btn-success" onclick = "showStudentInfo(this);" > <i class="fa fa-eye"></i></button>
             {{-- Delete form --}}
             <form class="" action="{{url('admin/sinh-vien/'.$account['id'])}}" method="post">
@@ -74,6 +75,65 @@
 <div class="row">
     <div class="col-md-2 col-md-offset-5" style="margin:0px auto;">{{$accounts->links()}}</div>
 </div>
+
+<!-- The Edit Modal -->
+<div class="modal" id="editModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Sửa tài khoản giảng viên</h4>
+
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        <form id="formEdit" class="form-group" action="{{url('admin/giang-vien')}}" method="post" >
+          @csrf
+            {!! method_field('put') !!}
+          <div class="form-group">
+            <label >Tên đăng nhập</label>
+            <input type="text" class="form-control" name="username" placeholder="Nhập tài khoản" required value="">
+          </div>
+          <div class="form-group">
+            <label for="">Mật khẩu (Để trống nếu không đổi mật khẩu)</label>
+            <input type="password" class="form-control" name="password" placeholder="Nhập mật khẩu"  value="">
+          </div>
+          <div class="form-group">
+            <label for="">Nhập lại mật khẩu (Để trống nếu không đổi mật khẩu) </label>
+            <input type="password" class="form-control"  name="re_password" id="passwordedit" placeholder="Nhập lại mật khẩu"  value="">
+          </div>
+          <div class="form-group">
+            <label for="">Họ và tên</label>
+            <input type="text" class="form-control"  name="full_name" placeholder="Nhập họ và tên" required value="">
+          </div>
+          <div class="form-group">
+            <label for="#username">VNU email</label>
+            <input type="email" class="form-control" name="vnu_mail" placeholder="Nhập VNU email" required value="">
+          </div>
+          <div class="form-group">
+            <label for="#username">Niên khóa</label>
+            <input class="form-control" name="school_year" placeholder="Nhập niên khóa" value="">
+          </div>
+
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-success" >Sửa</button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Thoát</button>
+        </form>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
 {{-- Modal --}}
 
 <!-- The Modal -->
@@ -185,14 +245,63 @@
         }
       }
     })
+
+    $('#formEdit').validate({
+      rules:{
+        username:{
+          required:true,
+          minlength:4,
+          maxlength:30
+        },
+        password:{
+        },
+        re_password:{
+          equalTo:'#passwordedit'
+        },
+        full_name:{
+          required:true,
+        },
+        vnu_mail:{
+          required:true,
+          email:true
+        }
+      },
+      messages:{
+        username:{
+          required:"Bạn chưa nhập tài khoản",
+          minlength:"Tài khoản quá ngắn",
+          maxlength:"Tài khoản quá dài"
+        },
+        re_password:{
+
+          equalTo:"Mật khẩu không khớp"
+        },
+        full_name:{
+          required:"Bạn chưa nhập họ và tên",
+        },
+        vnu_mail:{
+          required:"Bạn chưa nhập email",
+          email:"Email chưa đúng định dạng"
+        }
+      }
+    })
+
   });
 
 </script>
 <script type="text/javascript">
+// Set value edit form
+function setValueEditForm(elem){
+  let info = JSON.parse(elem.parentNode.getAttribute('account_info'));
+  $('#formEdit').attr('action',window.location.origin + '/admin/sinh-vien/'+info.id);
+  $('#formEdit input[name = username]').val(info.username);
+  $('#formEdit input[name = full_name]').val(info.full_name);
+  $('#formEdit input[name = vnu_mail]').val(info.vnu_mail);
+  $('#formEdit input[name = school_year]').val(info.school_year);
+}
 
 
-
-// Show teacher info
+// Show student info
 function showStudentInfo(elem){
   let info = JSON.parse(elem.parentNode.getAttribute('account_info'));
   swal({

@@ -16,7 +16,7 @@ class CreateSurveysTable extends Migration
         Schema::create('surveys', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->longText('content');
+            $table->longText('content')->nullable();
             $table->boolean('default')->default(false);
             $table->timestamps();
         });

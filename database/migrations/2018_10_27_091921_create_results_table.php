@@ -18,7 +18,7 @@ class CreateResultsTable extends Migration
             $table -> integer('course_id');
             $table -> integer('survey_id');
             $table -> integer('student_account_id');
-            $table -> longText('content');
+            $table -> longText('content')->nullable();
             $table->timestamps();
         });
     }

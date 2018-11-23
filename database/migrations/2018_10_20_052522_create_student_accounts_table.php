@@ -17,9 +17,9 @@ class CreateStudentAccountsTable extends Migration
             $table->increments('id');
             $table->string('username');
             $table->string('password');
-            $table->string('full_name');
-            $table->string('vnu_mail');
-            $table->string('school_year');
+            $table->string('full_name')->nullable();
+            $table->string('vnu_mail')->nullable();
+            $table->string('school_year')->nullable();
             $table->timestamps();
         });
     }
