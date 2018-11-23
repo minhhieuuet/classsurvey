@@ -5,6 +5,7 @@ use Auth;
 use App\TeacherAccount;
 use Illuminate\Http\Request;
 use App\Course;
+use App\User;
 class TeacherLayoutController extends Controller
 {
     public function index(){
@@ -29,5 +30,33 @@ class TeacherLayoutController extends Controller
       $course = Course::findOrFail($id);
       $students = $course->students;
       return view('TeacherLayout.course-students',compact('students'));
+    }
+    // About me
+    public function me(){
+      $teacher_username = \Auth::user()->name;
+      $teacher = TeacherAccount::where('username',$teacher_username)->first();
+      return view('TeacherLayout.me',compact('teacher'));
+    }
+
+    // Change password
+    public function changePass(){
+      return view('TeacherLayout.changepass');
+    }
+
+    public function postChangePass(Request $request){
+      $request->validate([
+        "oldPass"=>"required",
+        "newPass"=>"required|min:8|same:confirmNewPass",
+        "confirmNewPass"=>"required:min:8"
+      ]);
+      if(\Hash::check($request->oldPass,\Auth::user()->password)){
+        $user = User::find(\Auth::user()->id);
+        $user->password = bcrypt($request->newPass);
+        $user->save();
+        return redirect()->back()->with('success',"Thay doi thanh cong");
+      }else{
+        return redirect()->back()->with("error","Mật khẩu hiện tại không đúng");
+      }
+
     }
 }

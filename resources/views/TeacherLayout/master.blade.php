@@ -35,14 +35,14 @@
             <i class="fas fa-bars" id="bars"></i>
         </div>
         <div class="col-md-11">
-            @include('StudentLayout.navbar')
+            @include('TeacherLayout.navbar')
         </div>
       </div>
     </div>
     <div class="container-fluid">
       <div class="row">
         <div class="col-md-1">
-          @include('StudentLayout.sidebar')
+          @include('TeacherLayout.sidebar')
 
         </div>
         <div class="col-md-11" id="content">

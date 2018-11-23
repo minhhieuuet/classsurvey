@@ -38,8 +38,8 @@ Route::group(['prefix'=>'giang-vien','middleware'=>'teacher'],function(){
   Route::get('khao-sat/{id}','TeacherLayoutController@courseInfo');
   Route::get('khao-sat/danh-sach/{id}','TeacherLayoutController@courseStudents');
 
-  Route::get('change','StudentLayoutController@changePass');
-  Route::post('change','StudentLayoutController@postChangePass')->name('changePass');
+  Route::get('change','TeacherLayoutController@changePass');
+  Route::post('change','TeacherLayoutController@postChangePass')->name('changeTeacherPass');
 });
 // Admin
 Route::group(['prefix'=>'admin','middleware'=>'admin'],function(){
