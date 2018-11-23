@@ -134,7 +134,7 @@ class CourseController extends Controller
         foreach( $results as $result){
           if($result['ma_sv']!=null){
             // Create student
-            $student =  Student::updateOrCreate(['student_code'=>$this->trim_str($result['ma_sv']]),
+            $student =  Student::updateOrCreate(['student_code'=>$this->trim_str($result['ma_sv'])],
             ['student_code'=>$this->trim_str($result['ma_sv']),
             'name'=>$result['ho_va_ten'],
             'school_year'=>$result['lop_khoa_hoc']]);
