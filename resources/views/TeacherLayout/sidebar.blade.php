@@ -15,7 +15,7 @@
 
             <ul id="menu-content" class="menu-content collapse out">
                 <li>
-                  <a href="{{asset('sinh-vien')}}">
+                  <a href="{{asset('giang-vien')}}">
                   <i class="fa fa-dashboard fa-lg"></i> Trang chủ
                   </a>
                 </li>

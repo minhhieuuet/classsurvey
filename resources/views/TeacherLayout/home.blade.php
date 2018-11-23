@@ -27,7 +27,7 @@ swal({
 </script>
 
 <h1 class="title">
-  Khảo sát của tôi 
+  Lớp môn học của tôi 
 </h1>
 <div class="row">
   @foreach($courses as $course)

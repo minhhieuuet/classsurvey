@@ -1,4 +1,4 @@
-@extends('StudentLayout.master')
+@extends('TeacherLayout.master')
 @section('content')
   <style media="screen">
     .card td{
