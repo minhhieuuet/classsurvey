@@ -43,13 +43,15 @@
       <div class="form-group">
 
 
-          <input type="text" class="form-control" name="username" id="inputEmail" required placeholder="Nhập tài khoản của bạn">
+          <input type="text" class="form-control" name="username" id="inputEmail"
+          required placeholder="Nhập tài khoản của bạn" value="@if(session('info')) {{session('info')['username']}} @endif">
 
       </div>
 
       <div class="form-group">
 
-          <input type="password" class="form-control" name="password"  id="inputPassword" required placeholder="Nhập mật khẩu">
+          <input type="password" class="form-control" name="password"  id="inputPassword"
+           required placeholder="Nhập mật khẩu" >
 
       </div>
       <div class="forgot">

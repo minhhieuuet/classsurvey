@@ -26,7 +26,7 @@ class LoginController extends Controller
               return redirect()->route('teacherHome')->with('login-success','Chào mừng');
             }
             else{
-              return redirect()->back()->with('error','Tài khoản hoặc mật khẩu không khớp');
+              return redirect()->back()->with(['error'=>'Tài khoản hoặc mật khẩu không khớp','info'=>$request->all()]);
             }
         }
 
