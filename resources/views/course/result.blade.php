@@ -1,14 +1,14 @@
 @extends('index')
 @section('content')
 <div class="conainer-fluid">
-  <h5 class="text-center">KẾT QUẢ PHẢN HỒI CỦA NGƯỜI HỌC VỀ HỌC PHẦN</h5>
+  <h5 class="text-center">KẾT QUẢ PHẢN HỒI CỦA NGƯỜI HỌC VỀ HỌC PHẦN {{$course['code']}}</h5>
   <h6 class="text-center">Học kì : I năm 2018</h6>
   <br>
-  Tên học phần:
+  <b>Tên học phần:</b> {{$course['name']}} - {{$course['code']}}
   <br>
-  Tên giảng viên: {{$course['teacher_name']}}
+  <b>Tên giảng viên:</b> {{$course['teacher_name']}}
   <br>
-  Số lượng SV đánh giá: {{$course->joiningCount($course['id'])}}
+   <b>Số lượng SV đánh giá:</b> {{$course->joiningCount($course['id'])}}
   <table class="table table-bordered">
     <thead>
       <tr>

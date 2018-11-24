@@ -1,16 +1,14 @@
 @extends('index')
 @section('content')
 <div class="conainer-fluid">
-  <h5 class="text-center">KẾT QUẢ PHẢN HỒI CỦA NGƯỜI HỌC VỀ HỌC PHẦN</h5>
+  <h5 class="text-center">KẾT QUẢ PHẢN HỒI CỦA NGƯỜI HỌC VỀ HỌC PHẦN {{$course['code']}}</h5>
   <h6 class="text-center">Học kì : I năm 2018</h6>
   <br>
-  Tên học phần: {{$course['name']}}
+  <b>Tên học phần:</b> {{$course['name']}} - {{$course['code']}}
   <br>
-  Tên giảng viên: {{$course['teacher_name']}}
+  <b>Tên giảng viên:</b> {{$course['teacher_name']}}
   <br>
-  Số lượng SV đánh giá: {{$course->joiningCount($course['id'])}}
-  <br>
-  Sô lượng tham gia giảng dạy:
+   <b>Số lượng SV đánh giá:</b> {{$course->joiningCount($course['id'])}}
   <table class="table table-bordered">
     <thead>
       <tr>
@@ -21,12 +19,12 @@
       </tr>
     </thead>
     <tbody>
-    @foreach($arrKeys as $index => $key)
+    @foreach($survey_keys as $index => $key)
       <tr>
         <td>{{$index+1}}</td>
         <td>{{$key}}</td>
-        <td>0</td>
-        <td>0</td>
+        <td>{{round($result1[$key],2)}}</td>
+        <td>{{round($result2[$key],2)}}</td>
       </tr>
     @endforeach
     </tbody>

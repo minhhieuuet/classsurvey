@@ -67,8 +67,14 @@
       <td><a href="{{asset('admin/khao-sat/'.$course->survey['id'].'/edit')}}" target="_blank">{{$course->survey['name']}}</a></td>
       <td>
         <div class="btn-group" >
+          <a href="{{url('admin/khao-sat/thong-ke/'.$course['id'])}}" title="Xem thống kê">
+            <button class="btn btn-warning ">
+              <i class="fa fa-bar-chart"></i>
+            </button>
+
+          </a>
           {{-- Edit button --}}
-          <a href="{{asset('admin/khao-sat/'.$course->survey['id'].'/edit')}}" target="_blank">
+          <a href="{{asset('admin/khao-sat/'.$course->survey['id'].'/edit')}}" title="Sửa" target="_blank">
             <button type="button" class="btn btn-info"  >
                <i class="fa fa-edit"></i>
             </button>
@@ -77,7 +83,7 @@
             <form  method="post" action="{{url('admin/mon-hoc/'.$course['id'])}}" >
               @csrf
               {!! method_field('delete') !!}
-              <button type="submit" class="btn btn-danger" onclick="return confirm('Bạn có chắc chắn muốn xóa mục này ?')" > <i class="fa fa-trash"></i> </button>
+              <button type="submit" class="btn btn-danger" title="Xóa" onclick="return confirm('Bạn có chắc chắn muốn xóa mục này ?')" > <i class="fa fa-trash"></i> </button>
             </form>
             {{--  --}}
 

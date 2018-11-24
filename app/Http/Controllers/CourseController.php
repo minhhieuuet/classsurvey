@@ -26,7 +26,7 @@ class CourseController extends Controller
     }
     // About info and result of course
     public function courseInfo($id){
-        $course = Course::find($id);
+        $course = Course::findOrFail($id);
         $results = Course::find($id)->results;
 
         $arr = json_decode(json_encode($results));
@@ -163,11 +163,16 @@ class CourseController extends Controller
     protected function createCourseAndSurvey( $file ){
       Excel::load($file, function($doc) {
       $sheet = $doc->getSheetByName('DSLMH');
-
+      $defaultSurvey = Survey::where('default',1)->first();
       // Create survey
       $survey = new Survey();
       $survey -> name = $sheet->getCell('C9')->getValue();
-      $survey -> content = json_encode([]);
+      if($defaultSurvey){
+        $survey -> content = $defaultSurvey['content'];
+      }else{
+        $survey -> content = json_encode([]);
+      }
+
       $survey -> save();
 
       // Create course

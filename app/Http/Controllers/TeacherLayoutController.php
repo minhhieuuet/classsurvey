@@ -18,12 +18,77 @@ class TeacherLayoutController extends Controller
     public function courseInfo($id){
       $course = Course::find($id);
       $results = Course::find($id)->results;
-      // Get all keys of all result
-      $arrKeys =[];
-      foreach($results as $result){
-        $arrKeys = array_unique(array_merge($arrKeys,array_keys(json_decode($result['content'],true)))) ;
+
+      $arr = json_decode(json_encode($results));
+      $resultsArr = [];
+
+      foreach($arr as $item){
+        array_push($resultsArr,json_decode($item->content,true));
       }
-      return view('TeacherLayout.course-info',compact('course','arrKeys'));
+      $input = $resultsArr;
+      $survey_keys = [];
+      foreach($input as $sinhvien) {
+        $keys = array_keys($sinhvien);
+        $survey_keys = array_merge($survey_keys, $keys);
+      }
+      $survey_keys = array_unique($survey_keys);
+
+      $survey_values = array_fill(0, sizeof($survey_keys), 0);
+
+      $survey_result = array_combine($survey_keys, $survey_values);
+
+      $survey = array_fill(0, sizeof($input), $survey_result);
+
+      $i = 0;
+      foreach($input as $sinhvien) {
+          foreach($sinhvien as $key => $value) {
+            $survey[$i][$key] = $sinhvien[$key];
+          }
+          $i++;
+      }
+
+      $count = $survey_result;
+
+      // gia tri trung binh
+      $sum1 = $survey_result;
+      foreach($survey as $sinhvien) {
+        foreach($sinhvien as $key => $value) {
+          if($value > 0) {
+            $sum1[$key] += $value;
+            $count[$key]++;
+          }
+         }
+      }
+      $result1 = $survey_result;
+      foreach($result1 as $key => $value) {
+        $result1[$key] = $sum1[$key]/$count[$key];
+      }
+
+
+
+      $sum2 = $survey_result;
+      foreach($survey as $sinhvien) {
+        foreach($sinhvien as $key => $value) {
+          if($value > 0) {
+            $temp = ($value - $result1[$key]);
+            $temp = pow($temp, 2);
+            $sum2[$key] += $temp;
+          }
+         }
+      }
+
+      $result2 = $survey_result;
+      foreach($result2 as $key => $value) {
+        if($count[$key] == 1) {
+          $result2[$key] = $sum2[$key]/($count[$key]);
+        }
+        else {
+          $result2[$key] = $sum2[$key]/($count[$key]-1);
+        }
+        $result2[$key] = sqrt($result2[$key]);
+      }
+
+      return view('TeacherLayout.course-info',compact('course','survey_keys','result1','result2'));
     }
 
     public function courseStudents($id){

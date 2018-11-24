@@ -46,7 +46,7 @@
                   <a href="#"><i class="fas fa-clipboard-list"></i> Phiếu khảo sát <span class="arrow"></span></a>
                 </li>
                 <ul class="sub-menu collapse" id="survey">
-                  <li> <a href="{{asset('admin/khao-sat/create')}}">Thêm phiếu khảo sát</a></li>
+
                   <li> <a href="{{asset('admin/khao-sat')}}"> Danh sách phiếu khảo sát </a></li>
 
                 </ul>

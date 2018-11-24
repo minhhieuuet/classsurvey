@@ -34,16 +34,16 @@
       <td>
         <a href="{{url("admin/khao-sat/default/".$survey['id'])}}">
         @if($survey['default'])
-          <button class="btn btn-success" name="button"> <i class="fa fa-check"></i></button>
+          <button class="btn btn-success" title="Bỏ mặc định" name="button"> <i class="fa fa-check"></i></button>
         @else
-          <button class="btn btn-danger" name="button"> <i class="fa fa-times"></i> </button>
+          <button class="btn btn-danger" title="Đặt làm mặc định" name="button"> <i class="fa fa-times"></i> </button>
         @endif
         <a>
       </td>
       <td>
         <div class="btn-group" >
           {{-- Edit button --}}
-          <a href="{{asset('admin/khao-sat/'.$survey['id']."/edit")}}" target="_blank">
+          <a href="{{asset('admin/khao-sat/'.$survey['id']."/edit")}}" title="Sửa" target="_blank">
             <button type="button" class="btn btn-info"  >
                <i class="fa fa-edit"></i>
             </button>
@@ -51,7 +51,7 @@
 
 
             {{-- Show button --}}
-            <a href="{{asset('admin/khao-sat/'.$survey['id'])}}" target="_blank">
+            <a href="{{asset('admin/khao-sat/'.$survey['id'])}}" title="Xem chi tiết" target="_blank">
               <button type="submit" class="btn btn-success" >
                  <i class="fa fa-eye"></i>
               </button>
@@ -63,7 +63,7 @@
             <form  method="post" action="{{ url('/admin/khao-sat/'.$survey['id']) }}" >
               @csrf
               {!! method_field('delete') !!}
-              <button type="submit" class="btn btn-danger" onclick="return confirm('Bạn có chắc chắn muốn xóa mục này ?')" > <i class="fa fa-trash"></i> </button>
+              <button type="submit" title="Xóa" class="btn btn-danger" onclick="return confirm('Bạn có chắc chắn muốn xóa mục này ?')" > <i class="fa fa-trash"></i> </button>
             </form>
             {{--  --}}
 
