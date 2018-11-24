@@ -71,7 +71,7 @@
       </div>
   </div>
   <div class="panel-footer">
-    Xem thêm
+    <a href="{{asset('admin/khao-sat')}}">  Xem thêm</a>
   </div>
 
 </div>
@@ -90,7 +90,7 @@
       </div>
   </div>
   <div class="panel-footer">
-    Xem thêm
+    <a href="{{asset('admin/mon-hoc')}}">  Xem thêm</a>
   </div>
 
 </div>
