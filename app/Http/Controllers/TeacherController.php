@@ -132,6 +132,16 @@ class TeacherController extends Controller
       ]);
 
       $teacher = TeacherAccount::findOrFail($id);
+      //User table
+      $teacherAccount = User::where('name',$teacher['username'])->first();
+      $teacherAccount -> name = $request['username'];
+      if($request['password']!= null && $request['password']==$request['re_password']){
+        $teacherAccount -> password = bcrypt($request['password']);
+      }
+      $teacherAccount -> email = $request['vnu_mail'];
+      $teacherAccount -> save();
+
+      //Teacher Account table
       $teacher ->  username = $request['username'];
       $teacher -> full_name = $request['full_name'];
       $teacher -> vnu_mail = $request['vnu_mail'];
@@ -139,6 +149,8 @@ class TeacherController extends Controller
         $teacher -> password = bcrypt($request['password']);
       }
       $teacher -> save();
+
+
       return redirect()->back();
 
 
