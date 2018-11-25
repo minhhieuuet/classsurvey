@@ -44,7 +44,7 @@
 
 
           <input type="text" class="form-control" name="username" id="inputEmail"
-          required placeholder="Nhập tài khoản của bạn" value="@if(session('info')) {{session('info')['username']}} @endif">
+          required placeholder="Nhập tài khoản của bạn" value="@if(session('info')){{session('info')['username']}}@endif">
 
       </div>
 
