@@ -22,7 +22,6 @@ class TeacherController extends Controller
 
     public function import(Request $request){
       // import teacher form file
-
       if($request->hasFile('teachers')){
 
         $file = $request -> teachers;
@@ -42,7 +41,6 @@ class TeacherController extends Controller
               $value = array_values($teacher);
               TeacherAccount::updateOrCreate(["username"=>trim($value[1])],
               ["username"=>$this->trim_str($value[1]),
-              "password"=>bcrypt($value[2]),
               "full_name"=> $this->trim_str($value[3]),
               "vnu_mail"=>$this->trim_str($value[4])]);
 
@@ -87,7 +85,7 @@ class TeacherController extends Controller
         "full_name"=>"required",
         "vnu_mail"=>"required|email"
       ]);
-      TeacherAccount::create(["username"=>$request['username'],"password"=>bcrypt($request['password']),"full_name"=>$request['full_name'],
+      TeacherAccount::create(["username"=>$request['username'],"full_name"=>$request['full_name'],
       "vnu_mail"=>$request['vnu_mail']]);
       User::create(["name"=>$request['username'],"password"=>bcrypt($request['password']),"email"=>$request['vnu_mail']]);
       return redirect()->back()->with('create-success','Thêm thành công');
@@ -145,9 +143,7 @@ class TeacherController extends Controller
       $teacher ->  username = $request['username'];
       $teacher -> full_name = $request['full_name'];
       $teacher -> vnu_mail = $request['vnu_mail'];
-      if($request['password']!= null && $request['password']==$request['re_password']){
-        $teacher -> password = bcrypt($request['password']);
-      }
+
       $teacher -> save();
 
 
@@ -174,7 +170,4 @@ class TeacherController extends Controller
         return redirect()->back()->with('del-success','Xóa thành công');
     }
 
-    public function trim_str($str){
-      return preg_replace('/[\s]+/mu', ' ',$str);
-    }
 }

@@ -16,7 +16,6 @@ class CreateStudentAccountsTable extends Migration
         Schema::create('student_accounts', function (Blueprint $table) {
             $table->increments('id');
             $table->string('username');
-            $table->string('password');
             $table->string('full_name')->nullable();
             $table->string('vnu_mail')->nullable();
             $table->string('school_year')->nullable();

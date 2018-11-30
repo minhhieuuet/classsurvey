@@ -49,7 +49,7 @@ class StudentController extends Controller
         "vnu_mail"=>"required|email"
       ]);
 
-      StudentAccount::create(["username"=>$request['username'],"password"=>bcrypt($request['password']),"full_name"=>$request['full_name'],
+      StudentAccount::create(["username"=>$request['username'],"full_name"=>$request['full_name'],
       "vnu_mail"=>$request['vnu_mail'],"school_year"=>$request['school_year']]);
       User::updateOrCreate(['name'=>$request['username'],"password"=>bcrypt($request['password']),"email"=>$request['vnu_mail'],"role"=>3]);
       return redirect()->back()->with('create-success','Thêm thành công');
@@ -85,7 +85,7 @@ class StudentController extends Controller
                // filter only number
                $username = preg_replace('/[^0-9]/', '', $value[1]);
                StudentAccount::updateOrCreate(["username"=>$this->trim_str($username)],
-               ["username"=>$this->trim_str($username),"password"=>bcrypt($value[2]),"full_name"=>$value[3],
+               ["username"=>$this->trim_str($username),"full_name"=>$value[3],
                "vnu_mail"=>$value[4],"school_year"=>$value[5]]);
                User::updateOrCreate(["name"=>$this->trim_str($username)],['name'=>$this->trim_str($username),"password"=>bcrypt($value[2]),"email"=>$value[4],"role"=>3]);
              }
@@ -153,9 +153,5 @@ class StudentController extends Controller
         User::where('name',$student['student_code'])->delete();
         $student->delete();
         return redirect()->back()->with('del-success','Xóa thành công');
-    }
-
-    public function trim_str($str){
-      return preg_replace('/[\s]+/mu', ' ',$str);
     }
 }

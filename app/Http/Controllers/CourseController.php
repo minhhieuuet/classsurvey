@@ -143,7 +143,6 @@ class CourseController extends Controller
              //Create default student accounts
              StudentAccount::firstOrCreate(['username'=>$this->trim_str($result['ma_sv'])],[
              'username'=>$this->trim_str($result['ma_sv']),
-             'password'=>bcrypt('12345678'),
              'full_name'=>$result['ho_va_ten']
              ,'vnu_mail'=>$result['ma_sv']."@vnu.edu.vn",
              'school_year'=>$result['lop_khoa_hoc']]);
@@ -253,7 +252,5 @@ class CourseController extends Controller
         return redirect()->back()->with('del-success','Done');
     }
 
-    public function trim_str($str){
-      return preg_replace('/[\s]+/mu', ' ',$str);
-    }
+
 }

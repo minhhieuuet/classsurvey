@@ -16,7 +16,6 @@ class CreateTeacherAccountsTable extends Migration
         Schema::create('teacher_accounts', function (Blueprint $table) {
             $table->increments('id');
             $table->string('username');
-            $table->string('password');
             $table->string('full_name')->nullable();
             $table->string('vnu_mail')->nullable();
             $table->timestamps();

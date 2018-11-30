@@ -9,5 +9,5 @@ class StudentAccount extends Authenticatable
 {
     protected $guard = "students";
     protected $table = 'student_accounts';
-    protected $fillable =["username","password","full_name","vnu_mail","school_year"];
+    protected $fillable =["username","full_name","vnu_mail","school_year"];
 }

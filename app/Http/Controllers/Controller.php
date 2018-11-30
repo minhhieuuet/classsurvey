@@ -10,4 +10,7 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
+    public function trim_str($str){
+      return preg_replace('/[\s]+/mu', ' ',$str);
+    }
 }
