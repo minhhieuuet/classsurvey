@@ -153,7 +153,8 @@
 
           <div class="form-group">
             <label >Tên đăng nhập</label>
-            <input type="text" class="form-control" name="username" placeholder="Nhập tài khoản" required value="">
+            <input type="text" class="form-control" name="username" id="teacher_account" placeholder="Nhập tài khoản" required value="">
+            <p style="color:red;display:none;" id="username-error" > <i class="fas fa-exclamation-triangle"></i> Tên đăng nhập đã tồn tại</p>
           </div>
           <div class="form-group">
             <label for="">Mật khẩu</label>
@@ -289,6 +290,19 @@
 
 </script>
 <script type="text/javascript">
+$(document).ready(function(){
+  $('#teacher_account').change(function(){
+    $('#username-error').hide();
+      $.get("/api/check/"+$('#teacher_account').val(),function(res){
+        if(res == 'true'){
+          $('#username-error').show();
+          console.log("hihi");
+        }else{
+          $('#username-error').hide();
+        }
+      });
+  });
+})
 // Set value edit form
 function setValueEditForm(elem){
   let info = JSON.parse(elem.parentNode.getAttribute('account_info'));

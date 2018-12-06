@@ -94,7 +94,9 @@
             {!! method_field('put') !!}
           <div class="form-group">
             <label >Tên đăng nhập</label>
+
             <input type="text" class="form-control" name="username" placeholder="Nhập tài khoản" required value="">
+
           </div>
           <div class="form-group">
             <label for="">Mật khẩu (Để trống nếu không đổi mật khẩu)</label>
@@ -153,7 +155,8 @@
           @csrf
           <div class="form-group">
             <label >Tên đăng nhập (Bắt buộc là mã số sinh viên)</label>
-            <input type="text" class="form-control" name="username" placeholder="Nhập tài khoản" required value="">
+            <input type="text" class="form-control" id="student_account" name="username" placeholder="Nhập tài khoản" required value="">
+            <p style="color:red;display:none;" id="username-error" > <i class="fas fa-exclamation-triangle"></i> Tên đăng nhập đã tồn tại</p>
           </div>
           <div class="form-group">
             <label for="">Mật khẩu</label>
@@ -290,7 +293,23 @@
 
 </script>
 <script type="text/javascript">
+
+$(document).ready(function(){
+  $('#student_account').change(function(){
+    $('#username-error').hide();
+      $.get("/api/check/"+$('#student_account').val(),function(res){
+        if(res == 'true'){
+          $('#username-error').show();
+        }else{
+          $('#username-error').hide();
+        }
+      });
+  });
+})
+
+
 // Set value edit form
+
 function setValueEditForm(elem){
   let info = JSON.parse(elem.parentNode.getAttribute('account_info'));
   $('#formEdit').attr('action',window.location.origin + '/admin/sinh-vien/'+info.id);
