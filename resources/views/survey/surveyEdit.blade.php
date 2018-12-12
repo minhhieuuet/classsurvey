@@ -8,7 +8,9 @@
     <button class="btn btn-info btn-sm" onclick="this.parentNode.getElementsByClassName('invi-input')[0].focus()">
       <i class="fa fa-edit"></i>
     </button>
+    <button type="submit" class="btn btn-success " style="margin-left:0px;" @click="setContentDefault()">Nội dung mặc định</button>
   </h1>
+
 
 
 <table class="table table-hover" v-for="(field,indexField) in fields" :key="indexField">
@@ -163,6 +165,11 @@ data (){
   }
 },
 methods:{
+  setContentDefault(){
+    axios.get('/api/default-survey').then(res =>{
+      this.fields=res.data;
+    })
+  },
   deleteField (index){
     this.fields.splice(index,1);
   },

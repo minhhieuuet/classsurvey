@@ -21,4 +21,9 @@ class HomeController extends Controller
     public function checkExistingAccount($username){
       return User::where('name',$username)->count()>0?'true':'false';
     }
+
+    public function getDefaultSurveyContent(){
+      $defaultSurveyContent = Survey::where('default',1)->firstOrFail()->value('content');
+      return $defaultSurveyContent;
+    }
 }
