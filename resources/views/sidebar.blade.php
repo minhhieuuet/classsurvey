@@ -61,9 +61,6 @@
                 </ul>
 
 
-                <li>
-                  <a href="#"><i class="fab fa-slack"></i> Nhật kí </a>
-                </li>
 
             </ul>
      </div>

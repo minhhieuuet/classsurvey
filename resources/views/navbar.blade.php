@@ -13,10 +13,7 @@
       </li>
 
     </ul>
-    <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="search" placeholder="Tìm kiếm" aria-label="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Tìm kiếm</button>
-    </form>
+
     <div style="margin-left:10px;">
       <a href="{{asset('logout')}}" style="color:red;"> <i class="fas fa-power-off"></i> </a>
     </div>
