@@ -23,7 +23,7 @@ class HomeController extends Controller
     }
 
     public function getDefaultSurveyContent(){
-      $defaultSurveyContent = Survey::where('default',1)->firstOrFail()->value('content');
-      return $defaultSurveyContent;
+      $defaultSurveyContent = Survey::where('default',1)->firstOrFail();
+      return $defaultSurveyContent['content'];
     }
 }
