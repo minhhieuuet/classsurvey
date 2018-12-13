@@ -14,7 +14,7 @@
       <span class="zero"><span class="screen-reader-text">0</span></span>
       <span class="four"><span class="screen-reader-text">4</span></span>
     </section>
-    <div class="link-container">
+    <div class="link-container" style="cursor:pointer;">
       <a target="_blank" onclick="window.history.back();" class="more-link">Quay lại trang trước</a>
     </div>
   </body>
