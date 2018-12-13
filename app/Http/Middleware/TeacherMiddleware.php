@@ -19,6 +19,6 @@ class TeacherMiddleware
                  return $next($request);
           }
 
-         return redirect('/');
+         return abort(404);
     }
 }
