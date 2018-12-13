@@ -24,22 +24,8 @@ class StudentController extends Controller
         $students = Student::orderBy('id','DESC')->paginate(20);
         return view('student.list',compact('students'));
     }
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+    //Store student
     public function store(Request $request)
     {
       $request->validate([
@@ -55,12 +41,6 @@ class StudentController extends Controller
       return redirect()->back()->with('create-success','Thêm thành công');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
      // Import students account from excel
      public function import(Request $request){
        // import teacher form file
@@ -99,29 +79,6 @@ class StudentController extends Controller
      }
    }
 
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
       $request->validate([
@@ -141,12 +98,7 @@ class StudentController extends Controller
       return redirect()->back();
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function destroy($id)
     {
         $student = StudentAccount::findOrFail($id);

@@ -3,6 +3,7 @@
   <head>
     <meta charset="utf-8">
     <title>Error - ClassSurvey</title>
+    <link rel="icon" href="{{asset('icon.png')}}">
     <link rel="stylesheet" href="/css/404.css">
   </head>
   <body>
