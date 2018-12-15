@@ -8,7 +8,7 @@ function confirmSignOut(link){
   dangerMode: true,
 })
 .then((willQuit) => {
-  if (willQuit) {
+  if (willQuit.value) {
     window.location.href = link;
   }
 });
