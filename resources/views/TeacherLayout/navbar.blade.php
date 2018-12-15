@@ -22,8 +22,8 @@
           <a href="{{asset('giang-vien/change')}}"> <i class="fa fa-key"></i> Đổi mật khẩu </a>
         </div>
       </div>
-      <div>
-        <a href="{{asset('logout')}}" style="color:red;"> <i class="fas fa-power-off"></i> </a>
+      <div style="cursor:pointer;">
+        <a onclick="confirmSignOut(this.getAttribute('link'))" link="{{asset('logout')}}" style="color:red;"> <i class="fas fa-power-off"></i> </a>
       </div>
 
   </div>

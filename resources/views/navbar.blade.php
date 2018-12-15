@@ -14,8 +14,8 @@
 
     </ul>
 
-    <div style="margin-left:10px;">
-      <a href="{{asset('logout')}}" style="color:red;"> <i class="fas fa-power-off"></i> </a>
+    <div style="margin-left:10px;cursor:pointer;">
+      <a  onclick="confirmSignOut(this.getAttribute('link'))" link="{{asset('logout')}}" style="color:red;"> <i class="fas fa-power-off"></i> </a>
     </div>
   </div>
 </nav>

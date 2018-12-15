@@ -69,8 +69,8 @@ class StudentLayoutController extends Controller
     public function postChangePass(Request $request){
       $request->validate([
         "oldPass"=>"required",
-        "newPass"=>"required|min:8|same:confirmNewPass",
-        "confirmNewPass"=>"required:min:8"
+        "newPass"=>"required|min:8",
+        "confirmNewPass"=>"required:min:8|same:newPass"
       ]);
       if(\Hash::check($request->oldPass,\Auth::user()->password)){
         $user = User::find(\Auth::user()->id);
