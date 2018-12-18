@@ -64,9 +64,15 @@ class StudentController extends Controller
                $value = array_values($student);
                // filter only number
                $username = preg_replace('/[^0-9]/', '', $value[1]);
+
                StudentAccount::updateOrCreate(["username"=>$this->trim_str($username)],
                ["username"=>$this->trim_str($username),"full_name"=>$value[3],
                "vnu_mail"=>$value[4],"school_year"=>$value[5]]);
+
+               Student::updateOrCreate(["student_code"=>$this->trim_str($username)],[
+                 "student_code"=>$this->trim_str($username),"name"=>$value[3],"school_year"=>$value[5]
+               ]);
+
                User::updateOrCreate(["name"=>$this->trim_str($username)],['name'=>$this->trim_str($username),"password"=>bcrypt($value[2]),"email"=>$value[4],"role"=>3]);
              }
 

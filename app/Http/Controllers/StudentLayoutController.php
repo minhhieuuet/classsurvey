@@ -11,7 +11,7 @@ class StudentLayoutController extends Controller
 {
     public function index(){
       $studentCode = \Auth::user()->name;
-      $student = Student::where('student_code','like',"%".$studentCode."%")->first();
+      $student = Student::where('student_code',$studentCode)->first();
       return view('StudentLayout.home',compact('student'));
     }
     // About me page
