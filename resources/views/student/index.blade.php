@@ -27,7 +27,7 @@
       <form method="POST" action="{{route('importStudents')}}" enctype="multipart/form-data" >
         @csrf
         <label for="excel-file">Nhập file định dạng excel:</label>
-          <input id="excel-file" type="file" class="form-control" accept=".xlsx" name="file" style="width:70%;float:left;">
+          <input id="excel-file" type="file" class="form-control" accept=".xlsx" required name="file" style="width:70%;float:left;">
           <button type="submit" class="btn btn-success" style="float:left;"> <i class="fa fa-check"></i> </button>
       </form>
     </div>
