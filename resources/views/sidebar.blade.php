@@ -28,7 +28,7 @@
                 <ul class="sub-menu collapse" id="student">
 
                   <li><a href="{{asset('admin/sinh-vien')}}">Danh sách tài khoản</a></li>
-                  <li><a href="{{asset('admin/sinh-vien/danh-sach')}}">Danh sách sinh viên</a></li>
+                  <li><a href="{{asset('admin/sinh-vien/danh-sach')}}">Danh sách sinh viên theo môn học</a></li>
                 </ul>
 
 

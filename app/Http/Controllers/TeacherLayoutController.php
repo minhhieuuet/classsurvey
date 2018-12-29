@@ -8,6 +8,7 @@ use App\Course;
 use App\User;
 class TeacherLayoutController extends Controller
 {
+    //Teacher HomePage
     public function index(){
       $teacher = TeacherAccount::where('username','like','%'.Auth::user()->name.'%')->first();
       $full_name = trim(TeacherAccount::where('username','like',"%".\Auth::user()->name."%")->first()['full_name']);
@@ -15,6 +16,7 @@ class TeacherLayoutController extends Controller
       return view('TeacherLayout.home',compact('teacher','courses','test'));
     }
 
+    // Course info and caculating result of course
     public function courseInfo($id){
       $course = Course::find($id);
       $results = Course::find($id)->results;
@@ -59,6 +61,8 @@ class TeacherLayoutController extends Controller
           }
          }
       }
+
+      //avegare
       $result1 = $survey_result;
       foreach($result1 as $key => $value) {
         $result1[$key] = $sum1[$key]/$count[$key];
@@ -77,6 +81,7 @@ class TeacherLayoutController extends Controller
          }
       }
 
+      //standard deviation
       $result2 = $survey_result;
       foreach($result2 as $key => $value) {
         if($count[$key] == 1) {
@@ -91,6 +96,7 @@ class TeacherLayoutController extends Controller
       return view('TeacherLayout.course-info',compact('course','survey_keys','result1','result2'));
     }
 
+    //Get list students of course by id
     public function courseStudents($id){
       $course = Course::findOrFail($id);
       $students = $course->students;
@@ -108,6 +114,7 @@ class TeacherLayoutController extends Controller
       return view('TeacherLayout.changepass');
     }
 
+    //Post change password
     public function postChangePass(Request $request){
       $request->validate([
         "oldPass"=>"required",

@@ -36,15 +36,16 @@ class StudentLayoutController extends Controller
       }
       return redirect()->back();
 
-
     }
 
+    //Student Post Submit Survey
     public function submitSurvey(Request $request){
       $studentCode = \Auth::user()->name;
       $studentAccount = StudentAccount::where('username','like','%'.$studentCode.'%')->first();
       $course = Course::find($request->course_id);
 
       $resultCount = Result::where(['course_id' => $request->course_id,'student_account_id' => $studentAccount['id']])->count();
+      //Check if student already submit this survey
       if(!$resultCount){
         Result::create([
           'course_id' => $request->course_id,
@@ -66,6 +67,7 @@ class StudentLayoutController extends Controller
       return view('StudentLayout.changepass');
     }
 
+    //Post Change Password
     public function postChangePass(Request $request){
       $request->validate([
         "oldPass"=>"required",

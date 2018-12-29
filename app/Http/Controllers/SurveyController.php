@@ -11,13 +11,14 @@ class SurveyController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+     //Admin Survey Homepage
     public function index()
     {
       $surveys = Survey::orderBy('id','DESC')->paginate(20);
         return view('survey.surveyList',compact('surveys'));
     }
 
-    // Show all course
+    // Show all courses
     public function changeDefault($id){
       $survey = Survey::findOrFail($id);
       Survey::query()->update(['default'=>false]);
@@ -36,6 +37,7 @@ class SurveyController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+     //Create Survey
     public function create()
     {
           return view('survey.surveyAdd');
@@ -47,6 +49,8 @@ class SurveyController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
+     //Store Survey
     public function store(Request $request)
     {
 
@@ -60,6 +64,8 @@ class SurveyController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
+     //Show survey information
     public function show($id)
     {
       $survey = Survey::findOrFail($id);
@@ -72,6 +78,8 @@ class SurveyController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
+     //Edit Survey Content
     public function edit($id)
     {
         $survey = Survey::findOrFail($id);
@@ -85,6 +93,8 @@ class SurveyController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
+     //Post Edit Survey Content
     public function update(Request $request, $id)
     {
         $survey = Survey::findOrFail($id);
@@ -100,6 +110,8 @@ class SurveyController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
+     //Delete a survey from database
     public function destroy($id)
     {
         $survey = Survey::findOrFail($id);

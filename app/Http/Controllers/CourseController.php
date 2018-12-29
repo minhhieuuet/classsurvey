@@ -17,6 +17,7 @@ class CourseController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+     //Course home page
     public function index()
     {
         $courses = Course::orderBy('id','DESC')->paginate(10);
@@ -24,7 +25,7 @@ class CourseController extends Controller
         $studentCount = StudentAccount::count();
         return view('course.index',compact('courses','teacherCount','studentCount'));
     }
-    // About info and caculating result of course
+    // Course info and caculating result of course
     public function courseInfo($id){
         $course = Course::findOrFail($id);
         $results = Course::find($id)->results;
@@ -109,7 +110,7 @@ class CourseController extends Controller
     }
 
 
-    // import course and student from file
+    // import courses and students from file
     public function import(Request $request){
 
 

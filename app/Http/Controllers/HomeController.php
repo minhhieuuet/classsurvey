@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
+    //Admin Home
     public function index(){
       $teacherCount = TeacherAccount::count();
       $studentCount = StudentAccount::count();
@@ -18,10 +19,12 @@ class HomeController extends Controller
       return view('home',compact('teacherCount','studentCount','surveyCount','courseCount'));
     }
 
+    //Check existing account
     public function checkExistingAccount($username){
       return User::where('name',$username)->count()>0?'true':'false';
     }
 
+    //Get content of the default survey
     public function getDefaultSurveyContent(){
       $defaultSurveyContent = Survey::where('default',1)->firstOrFail();
       return $defaultSurveyContent['content'];

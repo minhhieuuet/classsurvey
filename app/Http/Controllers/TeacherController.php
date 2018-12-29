@@ -12,13 +12,15 @@ class TeacherController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+     //Teacher HomePage
     public function index()
     {
         $accounts = TeacherAccount::paginate(20);
         return view('teacher.index',compact('accounts'));
     }
 
-    // import from xlsx
+    // Import teacher  from xlsx
 
     public function import(Request $request){
       // import teacher form file
@@ -68,6 +70,8 @@ class TeacherController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
+     //Store a Teacher
     public function store(Request $request)
     {
       $request->validate([
@@ -76,8 +80,10 @@ class TeacherController extends Controller
         "full_name"=>"required",
         "vnu_mail"=>"required|email"
       ]);
+      //Create Teacher Account
       TeacherAccount::create(["username"=>$request['username'],"full_name"=>$request['full_name'],
       "vnu_mail"=>$request['vnu_mail']]);
+      //Create Teacher User
       User::create(["name"=>$request['username'],"password"=>bcrypt($request['password']),"email"=>$request['vnu_mail']]);
       return redirect()->back()->with('create-success','Thêm thành công');
     }
@@ -88,6 +94,7 @@ class TeacherController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+     //Show Teacher Information
     public function show($id)
     {
         $teacher = TeacherAccount::findOrFail($id);
@@ -102,6 +109,8 @@ class TeacherController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
+     //Update teacher information
     public function update(Request $request, $id)
     {
       $request->validate([
@@ -139,6 +148,7 @@ class TeacherController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+     //Delete a teacher from database
     public function destroy($id)
     {
 

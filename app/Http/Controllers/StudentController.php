@@ -14,12 +14,14 @@ class StudentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+     //Student accounts list
     public function index()
     {
         $accounts = StudentAccount::orderBy('id','DESC')->paginate(20);
         return view('student.index',compact('accounts'));
     }
 
+    //Students list
     public function list(){
         $students = Student::orderBy('id','DESC')->paginate(20);
         return view('student.list',compact('students'));
@@ -76,9 +78,12 @@ class StudentController extends Controller
            return redirect()->back()->with('error','File không đúng định dạng');
          }
 
+     }else{
+       return redirect()->back();
      }
    }
 
+   //Update student information
     public function update(Request $request, $id)
     {
       $request->validate([
@@ -91,14 +96,17 @@ class StudentController extends Controller
       $student -> full_name = $request['full_name'];
       $student -> vnu_mail = $request['vnu_mail'];
       $student -> school_year = $request['school_year'];
+
+      $studentUser = User::where('name',$student ->  username)->first();
       if($request['password']!= null && $request['password']==$request['re_password']){
-        $student -> password = bcrypt($request['password']);
+        $studentUser -> password = bcrypt($request['password']);
       }
+      $studentUser->save();
       $student -> save();
       return redirect()->back();
     }
 
-
+    //Delete student
     public function destroy($id)
     {
         $student = StudentAccount::findOrFail($id);

@@ -315,7 +315,7 @@ function setValueEditForm(elem){
   $('#formEdit').attr('action',window.location.origin + '/admin/sinh-vien/'+info.id);
   $('#formEdit input[name = username]').val(info.username);
   $('#formEdit input[name = full_name]').val(info.full_name);
-  $('#formEdit input[name = vnu_mail]').val(info.vnu_mail);
+  $('#formEdit input[name = vnu_mail]').val(info.vnu_mail.trim());
   $('#formEdit input[name = school_year]').val(info.school_year);
 }
 
