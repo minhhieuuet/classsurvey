@@ -9,7 +9,9 @@ use App\Result;
 use App\StudentAccount;
 class StudentLayoutController extends Controller
 {
+    //Student layout homepage
     public function index(){
+      //Get current student information
       $studentCode = \Auth::user()->name;
       $student = Student::where('student_code','like',"%".$studentCode."%")->first();
       return view('StudentLayout.home',compact('student'));

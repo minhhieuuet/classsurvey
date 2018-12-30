@@ -151,9 +151,10 @@ class TeacherController extends Controller
      //Delete a teacher from database
     public function destroy($id)
     {
-
+        //Delete if exist
         $account = TeacherAccount::findOrFail($id);
         $account ->delete();
+        //Delete user
         $userAccount = User::where('name','like','%'.$account['username'].'%')->first();
         if($userAccount){
           $userAccount -> delete();

@@ -291,6 +291,7 @@
 </script>
 <script type="text/javascript">
 $(document).ready(function(){
+  //Check existing teacher account
   $('#teacher_account').change(function(){
     $('#username-error').hide();
       $.get("/api/check/"+$('#teacher_account').val(),function(res){

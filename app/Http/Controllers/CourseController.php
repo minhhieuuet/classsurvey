@@ -190,6 +190,7 @@ class CourseController extends Controller
   //Destroy course
     public function destroy($id)
     {
+        //Delete if exist
         Course::findOrFail($id)->delete();
         return redirect()->back()->with('del-success','Done');
     }

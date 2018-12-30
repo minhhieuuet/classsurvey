@@ -154,7 +154,7 @@
         <form id="formInsert" class="form-group" action="{{url('admin/sinh-vien')}}" method="post" >
           @csrf
           <div class="form-group">
-            <label >Tên đăng nhập (Bắt buộc là mã số sinh viên)</label>
+            <label >Tên đăng nhập</label>
             <input type="text" class="form-control" id="student_account" name="username" placeholder="Nhập tài khoản" required value="">
             <p style="color:red;display:none;" id="username-error" > <i class="fas fa-exclamation-triangle"></i> Tên đăng nhập đã tồn tại</p>
           </div>
@@ -294,6 +294,7 @@
 </script>
 <script type="text/javascript">
 
+//Check existing account
 $(document).ready(function(){
   $('#student_account').change(function(){
     $('#username-error').hide();

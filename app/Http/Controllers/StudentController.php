@@ -36,9 +36,10 @@ class StudentController extends Controller
         "full_name"=>"required",
         "vnu_mail"=>"required|email"
       ]);
-
+      //Create student account
       StudentAccount::create(["username"=>$request['username'],"full_name"=>$request['full_name'],
       "vnu_mail"=>$request['vnu_mail'],"school_year"=>$request['school_year']]);
+      //Create user
       User::updateOrCreate(['name'=>$request['username'],"password"=>bcrypt($request['password']),"email"=>$request['vnu_mail'],"role"=>3]);
       return redirect()->back()->with('create-success','Thêm thành công');
     }
@@ -64,11 +65,13 @@ class StudentController extends Controller
 
              foreach($arr as $student){
                $value = array_values($student);
-               // filter only number
+               // filtering username  only number
                $username = preg_replace('/[^0-9]/', '', $value[1]);
+               //Creae student account from file
                StudentAccount::updateOrCreate(["username"=>$this->trim_str($username)],
                ["username"=>$this->trim_str($username),"full_name"=>$value[3],
                "vnu_mail"=>$value[4],"school_year"=>$value[5]]);
+               //Create User from file
                User::updateOrCreate(["name"=>$this->trim_str($username)],['name'=>$this->trim_str($username),"password"=>bcrypt($value[2]),"email"=>$value[4],"role"=>3]);
              }
 
@@ -91,12 +94,14 @@ class StudentController extends Controller
         "full_name"=>"required",
         "vnu_mail"=>"email"
       ]);
+      //Update student account
       $student = StudentAccount::findOrFail($id);
       $student ->  username = $this->trim_str($request['username']);
       $student -> full_name = $request['full_name'];
       $student -> vnu_mail = $request['vnu_mail'];
       $student -> school_year = $request['school_year'];
 
+      //Update student
       $studentUser = User::where('name',$student ->  username)->first();
       if($request['password']!= null && $request['password']==$request['re_password']){
         $studentUser -> password = bcrypt($request['password']);
@@ -109,7 +114,9 @@ class StudentController extends Controller
     //Delete student
     public function destroy($id)
     {
+        //Delete student account if exist
         $student = StudentAccount::findOrFail($id);
+        //Delete user
         User::where('name',$student['student_code'])->delete();
         $student->delete();
         return redirect()->back()->with('del-success','Xóa thành công');

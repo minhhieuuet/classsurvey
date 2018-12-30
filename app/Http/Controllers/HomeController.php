@@ -12,14 +12,18 @@ class HomeController extends Controller
 {
     //Admin Home
     public function index(){
+      //Count teacher accounts
       $teacherCount = TeacherAccount::count();
+      //Counting student accounts
       $studentCount = StudentAccount::count();
+      //Counting surveys
       $surveyCount = Survey::count();
+      //Counting Courses
       $courseCount = Course::count();
       return view('home',compact('teacherCount','studentCount','surveyCount','courseCount'));
     }
 
-    //Check existing account
+    //Check existing login account
     public function checkExistingAccount($username){
       return User::where('name',$username)->count()>0?'true':'false';
     }

@@ -9,18 +9,22 @@ class Course extends Model
 {
     protected $table = "courses";
 
+    //Survey has many courses
     public function survey(){
       return $this -> belongsTo('App\Survey','survey_id','id');
     }
 
+    //Course has one teacher
     public function teacher(){
       return $this -> hasOne('App\TeacherAccount','id','teacher_account_id');
     }
 
+    //Course has many students and student has many courses
     public function students(){
       return $this ->belongsToMany('App\Student','students_courses','course_id','student_id');
     }
 
+    //Courses has many results
     public function results(){
       return $this ->hasMany('App\Result');
     }
